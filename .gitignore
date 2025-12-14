@@ -1,0 +1,57 @@
+# --- 1. Python & Build Files (Rác của Python) ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# --- 2. Virtual Environments (Môi trường ảo) ---
+# Nếu bạn dùng venv để cài thư viện
+venv/
+env/
+ENV/
+.env
+.venv/
+
+# --- 3. PROJECT CONFIGURATION & SECRETS (QUAN TRỌNG) ---
+# Chặn file chứa Token và Password để không bị lộ lên Github
+config.py
+secrets.py
+.env
+
+# Chặn file cấu hình Wifi (nếu lỡ copy vào thư mục code)
+wpa_supplicant.conf
+
+# --- 4. IDE & Editor Settings (Cấu hình riêng của trình soạn thảo) ---
+# VS Code
+.vscode/
+# PyCharm
+.idea/
+# Mac OS
+.DS_Store
+
+# --- 5. Logs & Databases ---
+*.log
+*.sqlite3
+
+# --- 6. Hardware/IoT specific ---
+# Nếu bạn compile C++ trên Pi
+*.o
+*.out
