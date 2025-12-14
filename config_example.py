@@ -18,3 +18,9 @@ DEVICE_MAP = {
     2: "Light B",
     3: "Light C"
 }
+
+# --- INFLUXDB CONFIG ---
+INFLUX_URL = "http://xxxx/api/v2/write" 
+INFLUX_TOKEN = "xxxx"                   #
+INFLUX_ORG = "IIOT"
+INFLUX_BUCKET = "MONITORING_DATA"

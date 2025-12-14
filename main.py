@@ -62,6 +62,9 @@ def process_lora_data(data):
         # 4. Gửi lên ThingsBoard
         client.publish("v1/gateway/telemetry", json.dumps({dev_name: [telemetry]}))
         client.publish("v1/gateway/attributes", json.dumps({dev_name: attributes}))
+
+        # 5. Gửi lên InfluxDB
+        #influx_worker.send_data(dev_name, data, device_states[dev_id])
         
         print(f"-> Synced {dev_name} to Cloud.")
 
