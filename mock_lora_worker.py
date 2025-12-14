@@ -53,6 +53,7 @@ class LoRaWorker:
                 "current": round(random.uniform(0.5, 2.0), 2),
                 "power": p_consum,
                 "isMotion": random.choice([True, False]),
+                "isRain": random.choice([True, False]),
                 
                 # [QUAN TRỌNG] Lấy giá trị từ bộ nhớ giả lập thay vì hardcode
                 "auto_mode": node_state["auto_mode"], 

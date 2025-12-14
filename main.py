@@ -49,7 +49,8 @@ def process_lora_data(data):
             "voltage": data.get("voltage", 0),
             "current": data.get("current", 0),
             "power": data.get("power", 0),
-            "motion": data.get("isMotion", False)
+            "motion": data.get("isMotion", False),
+            "raining": data.get("isRain", False)
         }
         
         # 3. Đóng gói Attributes (Trạng thái nút ấn)
@@ -101,7 +102,8 @@ def on_message(client, userdata, msg):
                 
             elif method == "setYellowColor":
                 device_states[target_id]["yellow_color"] = params
-                if lora: lora.send_command(target_id, "COLOR", 1 if params else 0)
+                # 2 is yellow color, 1 is white color
+                if lora: lora.send_command(target_id, "COLOR", 2 if params else 1)
                 
             elif method == "setBrightness":
                 device_states[target_id]["led_brightness"] = int(params)

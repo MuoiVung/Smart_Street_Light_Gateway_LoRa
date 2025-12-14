@@ -46,9 +46,9 @@ class LoRaWorker(LoRa):
     def send_command(self, device_id, command_key, value):
         # Ví dụ gửi chuỗi: {"id":1,"cmd":"AUTO","val":1}
         cmd_json = {
-            "id": device_id,
+            "deviceID": device_id,
             "cmd": command_key,
-            "val": value
+            "value": value
         }
         msg = json.dumps(cmd_json)
         
