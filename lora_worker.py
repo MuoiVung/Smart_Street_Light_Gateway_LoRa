@@ -1,4 +1,5 @@
 # lora_worker.py
+import threading
 import json
 import time
 from SX127x.LoRa import *
@@ -44,21 +45,22 @@ class LoRaWorker(LoRa):
 
     # Hàm gửi lệnh xuống End Node (Downlink)
     def send_command(self, device_id, command_key, value):
-        # Ví dụ gửi chuỗi: {"id":1,"cmd":"AUTO","val":1}
-        cmd_json = {
-            "deviceID": device_id,
-            "cmd": command_key,
-            "value": value
-        }
-        msg = json.dumps(cmd_json)
-        
-        # Cần chuyển sang mode TX để gửi, sau đó quay lại RX
-        current_mode = self.get_mode()
-        self.set_mode(MODE.STDBY)
-        self.write_payload(list(bytearray(msg, "utf-8")))
-        self.set_mode(MODE.TX)
-        print(f"[LORA TX] Sent: {msg}")
-        
-        # Chờ gửi xong rồi quay lại nghe (RXCONT)
-        time.sleep(0.2) 
-        self.set_mode(MODE.RXCONT)
+       with self.lock:
+            # Ví dụ gửi chuỗi: {"deviceID":1,"cmd":"AUTO","value":1}
+            cmd_json = {
+                "deviceID": device_id,
+                "cmd": command_key,
+                "value": value
+            }
+            msg = json.dumps(cmd_json)
+            
+            # Cần chuyển sang mode TX để gửi, sau đó quay lại RX
+            current_mode = self.get_mode()
+            self.set_mode(MODE.STDBY)
+            self.write_payload(list(bytearray(msg, "utf-8")))
+            self.set_mode(MODE.TX)
+            print(f"[LORA TX] Sent: {msg}")
+            
+            # Chờ gửi xong rồi quay lại nghe (RXCONT)
+            time.sleep(0.2) 
+            self.set_mode(MODE.RXCONT)
